@@ -19,6 +19,9 @@ def login(request):
 
     user = authenticate(username=username, password=password)
 
+    if not user:
+        return Response({ "message": "invalid details" }, status=401)
+
     if user.is_superuser:
         model = UserModel.objects.get_or_create(user=user, role="admin")
 
