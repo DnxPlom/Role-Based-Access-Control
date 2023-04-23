@@ -64,4 +64,7 @@ Create superuser: python manage.py createsuperuser
 		"message": "Provide password"
 	}
 
-	
+### Run with docker 
+	docker build -t app .
+	docker run -p 8000:8000 app
+
