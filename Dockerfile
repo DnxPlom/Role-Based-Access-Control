@@ -10,12 +10,13 @@ RUN apt-get update && \
 
 COPY requirements.txt requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
 
-# Create a directory for static files
-RUN mkdir -p /app/static
+# collect static files
+RUN python manage.py collectstatic --noinput
 
 # Copy Nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
